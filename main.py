@@ -133,7 +133,7 @@ class SystemMonitorApp(QWidget):
     def update_timer(self):
         if self.recording and self.start_time:
             sec = int(time.time() - self.start_time)
-            self.timer_label.setText(f"Время записи: {sec}")
+            self.timer_label.setText(f"Время записи: {format_seconds(sec)}")
 
     def closeEvent(self, event):
         if self.db_connection:
@@ -141,7 +141,16 @@ class SystemMonitorApp(QWidget):
         event.accept()
 
 
-
+def format_seconds(seconds):
+    if 11 <= seconds % 100 <= 19:
+        return f"{seconds} секунд"
+    last_digit = seconds % 10
+    if last_digit == 1:
+        return f"{seconds} секунда"
+    elif 2 <= last_digit <= 4:
+        return f"{seconds} секунды"
+    else:
+        return f"{seconds} секунд"
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
