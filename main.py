@@ -28,6 +28,7 @@ class SystemMonitorApp(QWidget):
 
         self.start_button.clicked.connect(self.start_recording)
         self.stop_button.clicked.connect(self.stop_recording)
+        self.view_history_button.clicked.connect(self.view_history)
         self.stop_button.hide()  # Скрываем, пока запись не начата
 
         # Таймеры
