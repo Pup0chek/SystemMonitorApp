@@ -70,6 +70,11 @@ class SystemMonitorApp(QWidget):
             self.recording = True
             self.start_button.hide()
             self.stop_button.show()
+
+            # Сразу обновляем данные
+            self.update_stats()
+
+            # Запускаем таймеры
             self.timer.start(interval * 1000)  # Таймер для записи данных
             self.display_timer.start(1000)  # Таймер для обновления времени записи
         except ValueError as e:
@@ -81,10 +86,16 @@ class SystemMonitorApp(QWidget):
             create_history_window(data)  # Создаем и показываем окно истории
         except Exception as e:
             QMessageBox.critical(self, "Ошибка", f"Не удалось загрузить данные истории: {e}")
+
     def stop_recording(self):
         self.recording = False
         self.start_time = None
+
         self.timer_label.setText("Время записи: 0 секунд")
+        self.cpu_label.setText(f"CPU: 0%")
+        self.ram_label.setText(f"RAM: 0/0 GB")
+        self.disk_label.setText(f"Disk: 0/0 GB")
+
         self.stop_button.hide()
         self.start_button.show()
 
@@ -106,7 +117,6 @@ class SystemMonitorApp(QWidget):
 
 
 def format_seconds(seconds):
-    """Форматирование секунд с правильным окончанием."""
     if 11 <= seconds % 100 <= 19:
         return f"{seconds} секунд"
     last_digit = seconds % 10
