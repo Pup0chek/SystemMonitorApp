@@ -26,19 +26,15 @@ def create_monitor_layout(parent):
     layout.addWidget(parent.start_button)
 
 
-
     parent.stop_button = QPushButton("Остановить")
     parent.stop_button.hide()
     layout.addWidget(parent.stop_button)
-
-    # Добавляем timer_label
 
 
     parent.view_history_button = QPushButton("Просмотреть историю")
     layout.addWidget(parent.view_history_button)
 
     return layout
-
 
 
 def create_history_window(data):
@@ -57,3 +53,4 @@ def create_history_window(data):
     layout.addWidget(table)
     dialog.setLayout(layout)
     dialog.exec_()
+

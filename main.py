@@ -110,7 +110,10 @@ class SystemMonitorApp(QWidget):
             self.timer_label.setText(f"Время записи: {format_seconds(elapsed)}")
 
     def closeEvent(self, event):
-        # Закрытие соединения с базой данных
+        if self.timer.isActive():
+            self.timer.stop()
+        if self.display_timer.isActive():
+            self.display_timer.stop()
         if self.db_connection:
             self.db_connection.close()
         event.accept()
