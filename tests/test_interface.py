@@ -17,7 +17,7 @@ def app():
 def test_create_monitor_layout(qtbot):
     from PyQt5.QtWidgets import QWidget
     widget = QWidget()
-    layout = create_monitor_layout(widget)
+    create_monitor_layout(widget)
 
     assert widget.cpu_label.text() == "CPU: 0%"
     assert widget.ram_label.text() == "RAM: 0/0 GB"
